@@ -8,7 +8,7 @@ return (
         <h2>{name}</h2>
         <img src={image} alt="img not found" width="200px" height="250px" />
         <h4>{temperament}</h4>
-        <p>{weight}</p>
+        <h3>{weight}</h3>
         <Link to={"/home/" + id}><button>More Details</button></Link>
     </div>
 )

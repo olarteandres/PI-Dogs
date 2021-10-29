@@ -5,6 +5,7 @@ import {GET_DOG, ADD_DOGS, DETAIL_DOGS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILT
 const initialstate = {
     dogs : [],
     allDogs: [],
+    allDogsTemp: [],
     details : [],
     newDogs : [],
     temperaments: [],
@@ -17,7 +18,8 @@ const initialstate = {
          case GET_DOG:
              return{
                  ...state,
-                 dogs: action.payload
+                 dogs: action.payload,
+                 allDogsTemp: action.payload
              }
 
          case ADD_DOGS:
@@ -51,12 +53,13 @@ const initialstate = {
             // }
 
             case FILTER_BY_TEMPERAMENT:
-            const allDogs = state.dogs
-            const tempFilter = action.payload === 'Temperaments' ? allDogs :  allDogs.filter(e => {const aux = e.Temperaments?.map(t=> t.name);
-                if (aux?.includes(action.payload)) return e;});
+            const allDogsTemp = state.allDogsTemp
+            const tempFilter = action.payload === 'Temperaments' ? allDogsTemp :  allDogsTemp.filter(e => {
+                if (e.temperament && e.temperament.includes(action.payload)) return e;});
+                console.log(tempFilter)
             
             
-            return {...state, allDogs: tempFilter
+            return {...state, dogs: tempFilter
             }
 
             default:

@@ -65,11 +65,11 @@ export default function Home() {
         </select>
 
         <select onChange={(e)=>handleFilterTemp(e)}>
-                    <option name='temp' key={'a'}>Temperaments</option>
-                    {allTemperaments && allTemperaments.map((el,i)=>(
-                        <option name='temperaments'key={i} value={el.name}>{el.name}</option>
+                    <option name='temperament' key={'a'}>Temperaments</option>
+                    {allTemperaments.map((tem,i)=>(
+                        <option name='temperaments'key={i} value={tem.name}>{tem.name}</option>
                     ))}
-                </select>
+         </select>
         
         <Paginado
         dogsPerPage= {dogsPerPage}
