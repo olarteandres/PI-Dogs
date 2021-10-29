@@ -53,6 +53,7 @@ router.get('/', async (req, res, next) => {
             image: response.image.url,
             origin: response.origin,
             id: response.id,
+            temperament:response.temperament
             
         }
         
