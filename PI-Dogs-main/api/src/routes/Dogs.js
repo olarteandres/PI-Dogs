@@ -23,13 +23,17 @@ router.get('/', async (req, res, next) => {
     if(!name){
       const infoApi = getApi.data.map(response => {
         return {
-          name: response.name,
+                name: response.name,
+                id: response.id,
                 weight: response.weight.metric,
                 height: response.height.metric,
                 life_span: response.life_span,
                 image: response.image.url,
                 weigthMin: response.weight.metric.split("-"),
-                heightMax: response.weight.metric.split("-")
+                heightMax: response.weight.metric.split("-"),
+                origin: response.origin,
+                temperamet: response.temperamet
+                
 
               }
             }); 
@@ -45,7 +49,10 @@ router.get('/', async (req, res, next) => {
             weight: response.weight.metric,
             height: response.height.metric,
             life_span: response.life_span,
-            image: response.image.url
+            image: response.image.url,
+            origin: response.origin,
+            id: response.id,
+            
         }
         
     }); 
@@ -61,6 +68,12 @@ router.get('/', async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try{
     const {id} = req.params;
+    if(typeof id === 'string' && id.length > 8){
+        
+      const db = await Dog.findByPk(id);
+      res.send( db );
+
+  } 
     const getApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
     const infoApi = getApi.data.map(response =>{
       return {
@@ -69,7 +82,7 @@ router.get("/:id", async (req, res, next) => {
         life_span: response.life_span,
         weight: response.weight,
         height: response.height,
-        temperamet: response.temperamet,
+        
       }
     })
     const find = infoApi.find(data => data.id === Number(id));
@@ -80,12 +93,17 @@ router.get("/:id", async (req, res, next) => {
 })
 
   router.post('/', async function(req, res, next) {
-    const {name, height, weight, life_span } = req.body
+    const {name, height, weight, life_span, image, origin} = req.body
     const newDog = await Dog.create({
       name,
       life_span,
+      image,
       height,
-      weight
+      weight,
+      origin,
+      
+      
+      
     });
     res.send(newDog)
   });
