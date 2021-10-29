@@ -32,7 +32,8 @@ router.get('/', async (req, res, next) => {
                 weigthMin: response.weight.metric.split("-"),
                 heightMax: response.weight.metric.split("-"),
                 origin: response.origin,
-                temperamet: response.temperamet
+                temperament:response.temperament
+                
                 
 
               }
@@ -82,6 +83,7 @@ router.get("/:id", async (req, res, next) => {
         life_span: response.life_span,
         weight: response.weight,
         height: response.height,
+        temperament: response.temperament
         
       }
     })
