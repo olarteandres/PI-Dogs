@@ -51,7 +51,7 @@ const initialstate = {
             // }
 
             case FILTER_BY_TEMPERAMENT:
-            const allDogs = state.allDogs
+            const allDogs = state.dogs
             const tempFilter = action.payload === 'Temperaments' ? allDogs :  allDogs.filter(e => {const aux = e.Temperaments?.map(t=> t.name);
                 if (aux?.includes(action.payload)) return e;});
             

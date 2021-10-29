@@ -80,15 +80,13 @@ export default function Home() {
         {currentDogs?.map((el) => {
           return (
             <div>
-              <Link to={"/home/" + el.id}>
                 <Card
+                  temperament={el.temperament}
                   name={el.name}
                   image={el.image}
-                  temperament={el.temperament}
                   weight={el.weight}
                   key={el.id}
                 />
-              </Link>
             </div>
           );
         })}
