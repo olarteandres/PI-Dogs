@@ -1,5 +1,5 @@
 import axios from "axios"
-import {GET_DOG,DETAIL_DOGS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILTER_BY_TEMPERAMENT, GET_SEARCHDOGS } from "./types"
+import {GET_DOG,DETAIL_DOGS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILTER_BY_TEMPERAMENT, GET_SEARCHDOGS, FILTER_BY_CREATED, SEARCHBAR, ORDER_BY_NAME} from "./types"
 
 
 
@@ -38,21 +38,6 @@ export function getTemperaments () {
     }
 }
 
-// export function addDogs (name, life_span, image, height, weight, origin) {
-//     return {
-//         type: ADD_DOGS,
-//         payload: (
-//             name,
-//             life_span,
-//             image,
-//             height,
-//             weight,
-//             origin
-
-//         )
-//     }
-// }
-
 export function getDogsDetail (id) {
     return async function (dispatch){
         var detail = await axios ("http://localhost:3001/api/dogs/" + id,);
@@ -66,6 +51,7 @@ export function getDogsDetail (id) {
 export function filterByWeight (payload) {
     return {
           type: FILTER_BY_WEIGHT,
+          payload
           
     } 
 }
@@ -75,4 +61,28 @@ export function filterDogsByTemp(payload){
         type: FILTER_BY_TEMPERAMENT,
         payload
     }
+}
+
+export function filterDogsByCreated(payload){
+    return {
+        type: FILTER_BY_CREATED,
+        payload
+    }
+}
+
+export function orderByName(payload){
+    return {
+        type: ORDER_BY_NAME,
+        payload
+    }
+}
+
+export function getName(name) {
+    return async function (dispatch){
+        const query = await axios.get('http://localhost:3001/api/dogs?name='+name)
+        dispatch ({
+            type: SEARCHBAR,
+            payload: query.data,
+        })
+    }   
 }

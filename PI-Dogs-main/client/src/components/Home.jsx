@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogs, getTemperaments, filterByWeight, filterDogsByTemp } from "../actions/actions.js";
+import { getDogs, getTemperaments, filterByWeight, filterDogsByTemp, filterDogsByCreated, orderByName } from "../actions/actions.js";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import Card from "./Card";
@@ -11,15 +11,16 @@ export default function Home() {
   const dispatch = useDispatch();
   const allDogs = useSelector((state) => state.dogs);
   const allTemperaments = useSelector((state) => state.temperaments);
-  const [currentPage, setCurrentState] = useState(1)
+  const [orden, setOrden] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
   const [dogsPerPage, setDogPerPage] = useState(8)
   const indexOfLastDogs = currentPage * dogsPerPage
   const indexOFFirstDogs = indexOfLastDogs - dogsPerPage
-  const currentDogs = allDogs.slice(indexOFFirstDogs, indexOfLastDogs)
+  const currentDogs = allDogs?.slice(indexOFFirstDogs, indexOfLastDogs)
 
 
   const paginado = (pageNumber) => {
-    setCurrentState(pageNumber)
+    setCurrentPage(pageNumber)
   }
 
 
@@ -34,16 +35,29 @@ export default function Home() {
   function handleClick(event) {
     event.preventDefault();
     dispatch(getDogs());
-    dispatch(getTemperaments())
+    // dispatch(getTemperaments())
   }
 
   function handleFilterTemp(e){
     dispatch(filterDogsByTemp(e.target.value))
 }
 
-  // function handleFilterWeight(event) {
-  //   dispatch(filterByWeight(event.target.value))
-  // }
+function handleSortName(e){
+  dispatch(orderByName(e.target.value))
+  setCurrentPage(1)
+  setOrden(`Ordenado ${e.target.value}`)
+}
+
+  function handleFilterWeight(event) {
+    dispatch(filterByWeight(event.target.value))
+    setOrden(`Ordenado ${event.target.value}`)
+  }
+
+  function handleFilterByCreated(event) {
+    dispatch(filterDogsByCreated(event.target.value))
+    
+    
+  }
 
   return (
     <div>
@@ -54,16 +68,24 @@ export default function Home() {
       </button>
       <div>
       <SearchBar/>
-        <select>
-          <option value="asc">Upward</option>
-          <option value="desc">Descending</option>
-        </select>
-        <select>
+        <select onChange={e => handleSortName(e)}>
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
+          </select>
+          <select>
           <option value="Ord">Orden alfabético</option>
-          <option value="weight">Peso</option>
-          <option value="name">Raza existente</option>
+        </select>
+        <select onChange={e => handleFilterWeight(e)}>
+          <option value="asc">Peso minimo</option>
+          <option value="desc">Peso maximo</option>
         </select>
 
+        <select onChange={e => handleFilterByCreated(e)}>
+          <option value="Exist">Existentes</option>
+          <option value="All">Todas las razas</option>
+          <option value="Created">Creadas</option>
+        </select>
+       
         <select onChange={(e)=>handleFilterTemp(e)}>
                     <option name='temperament' key={'a'}>Temperaments</option>
                     {allTemperaments.map((tem,i)=>(
@@ -73,7 +95,7 @@ export default function Home() {
         
         <Paginado
         dogsPerPage= {dogsPerPage}
-        allDogs= {allDogs.length}
+        allDogs= {allDogs?.length}
         paginado= {paginado}
         />
         

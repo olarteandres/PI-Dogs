@@ -1,4 +1,4 @@
-import {GET_DOG, ADD_DOGS, DETAIL_DOGS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILTER_BY_TEMPERAMENT, GET_SEARCHDOGS} from "../actions/types.js"
+import {GET_DOG, ADD_DOGS, DETAIL_DOGS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILTER_BY_TEMPERAMENT, SEARCHBAR, FILTER_BY_CREATED, ORDER_BY_NAME} from "../actions/types.js"
 
 
 
@@ -39,26 +39,76 @@ const initialstate = {
                 temperaments: action.payload
             }
 
-            case GET_SEARCHDOGS:
+            case SEARCHBAR:
             return{
                 ...state,
-                allDogs: action.payload
+                dogs: action.payload
             }
-            // case FILTER_BY_WEIGHT:
-            //     const allDogs = state.dogs
-            //     const weightFiltered = action.payload === "Weight" ? allDogs : allDogs.filter(w => w.dogs === action.payload)
-            // return{
-            //     ...state,
-            //     dogs: weightFiltered
-            // }
+
+            case ORDER_BY_NAME:
+                const sortName = action.payload === "asc" ?
+                state.dogs.sort(function(a, b){
+                    if(a.name.toLowerCase() > b.name.toLowerCase()){
+                        return 1;
+                    }
+                    if(b.name.toLowerCase() > a.name.toLowerCase()){
+                        return -1
+                    }
+                    return 0
+                }) :
+                state.dogs.sort(function(a, b){
+                    if(a.name.toLowerCase() > b.name.toLowerCase()){
+                        return -1;
+                    }
+                    if(b.name.toLowerCase() > a.name.toLowerCase()){
+                        return 1
+                    }
+                    return 0
+                })
+                return{
+                    ...state,
+                    dogs: sortName
+                }
+                
+            
+
+            case FILTER_BY_CREATED:
+                const allCreated = state.allDogsTemp
+                const createdFilter = action.payload === "Created" ? allCreated.filter(e => e.createdInDb) : allCreated.filter(e => !e.createdInDb)
+                return{
+                    ...state,
+                    dogs: action.payload === "All" ? state.allDogsTemp : createdFilter
+                }
+
+            case FILTER_BY_WEIGHT:
+                const sortWeight = action.payload === "asc" ?
+                state.dogs.sort(function(a, b){
+                    if(parseInt(a.weight[0]) > parseInt(b.weight[0])){
+                        return 0;
+                    }
+                    if(parseInt(b.weight[0]) > parseInt(a.weight[0])){
+                        return -1
+                    }
+                    return 0
+                }) :
+                state.dogs.sort(function(a, b){
+                    if(parseInt(a.weight[1]) > parseInt(b.weight[1])){
+                        return -1;
+                    }
+                    if(parseInt(b.weight[1]) > parseInt(a.weight[1])){
+                        return 1
+                    }
+                    return 0
+                })
+                return{
+                    ...state,
+                    dogs: sortWeight
+                }
 
             case FILTER_BY_TEMPERAMENT:
-            const allDogsTemp = state.allDogsTemp
-            const tempFilter = action.payload === 'Temperaments' ? allDogsTemp :  allDogsTemp.filter(e => {
-                if (e.temperament && e.temperament.includes(action.payload)) return e;});
-                console.log(tempFilter)
-            
-            
+            const dogsTemp = state.allDogsTemp
+            const tempFilter = action.payload === 'Temperaments' ? dogsTemp :  dogsTemp.filter(e => {
+                if (e.temperament && e.temperament.includes(action.payload)) return e;})
             return {...state, dogs: tempFilter
             }
 
