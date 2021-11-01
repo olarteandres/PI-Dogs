@@ -25,12 +25,10 @@ router.get('/', async (req, res, next) => {
         return {
                 name: response.name,
                 id: response.id,
-                weight: response.weight.metric,
-                height: response.height.metric,
+                weight: response.weight.metric.split("-"),
+                height: response.height.metric.split("-"),
                 life_span: response.life_span,
                 image: response.image.url,
-                weigthMin: response.weight.metric.split("-"),
-                heightMax: response.weight.metric.split("-"),
                 origin: response.origin,
                 temperament:response.temperament
                 
@@ -40,6 +38,12 @@ router.get('/', async (req, res, next) => {
             }); 
             const data = await getDB()
             const dataAll = infoApi.concat(data)
+            if(name){
+              const api = await getApi();
+              const newQuery = await api.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
+              
+
+            }
 
         return res.json(dataAll);
     }else {
@@ -95,8 +99,9 @@ router.get("/:id", async (req, res, next) => {
   }
 })
 
+
   router.post('/', async function(req, res, next) {
-    const {name, height, weight, life_span, image, origin} = req.body
+    const {name, height, weight, life_span, image, origin,temperament} = req.body
     const newDog = await Dog.create({
       name,
       life_span,
@@ -104,6 +109,7 @@ router.get("/:id", async (req, res, next) => {
       height,
       weight,
       origin,
+      temperament
       
       
       
