@@ -25,7 +25,7 @@ const initialstate = {
          case ADD_DOGS:
             return{
                 ...state,
-                dogs: state.dogs.concat(action.payload)
+                
             }
 
          case DETAIL_DOGS:
@@ -81,8 +81,9 @@ const initialstate = {
                 }
 
             case FILTER_BY_WEIGHT:
+                const isNan = state.dogs.filter(e => !isNaN(e.weight[0]))
                 const sortWeight = action.payload === "asc" ?
-                state.dogs.sort(function(a, b){
+                isNan.sort(function(a, b){
                     if(parseInt(a.weight[0]) > parseInt(b.weight[0])){
                         return 0;
                     }

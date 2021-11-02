@@ -1,5 +1,5 @@
 import axios from "axios"
-import {GET_DOG,DETAIL_DOGS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILTER_BY_TEMPERAMENT, GET_SEARCHDOGS, FILTER_BY_CREATED, SEARCHBAR, ORDER_BY_NAME} from "./types"
+import {GET_DOG,DETAIL_DOGS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILTER_BY_TEMPERAMENT, GET_SEARCHDOGS, FILTER_BY_CREATED, SEARCHBAR, ORDER_BY_NAME,POST_DOGS} from "./types"
 
 
 
@@ -84,5 +84,12 @@ export function getName(name) {
             type: SEARCHBAR,
             payload: query.data,
         })
+    }   
+}
+
+export function postDogs(payload) {
+    return async function (dispatch){
+        const info = await axios.post('http://localhost:3001/api/dogs',payload)
+        return info;
     }   
 }
