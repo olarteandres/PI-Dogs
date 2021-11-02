@@ -2,6 +2,7 @@ const { Router } = require('express');
 const axios = require ("axios")
 const {API_KEY} = process.env;
 const {Dog, Temperament} = require('../db');
+const Op = require('sequelize')
 
 
 // Importar todos los routers;
@@ -41,6 +42,15 @@ router.get('/', async (req, res, next) => {
             if(name){
               const api = await getApi();
               const newQuery = await api.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
+              const db = await Dog.findAll({
+                includes: Temperament,  //para mas adelnate cuando conecte todo
+                where: {
+                    name: {
+                        [Op.iLike]: '%' + name + '%'
+                    }
+                }
+            })
+            const infoTotal = nameQuery.concat(db);
               
 
             }
@@ -71,13 +81,14 @@ router.get('/', async (req, res, next) => {
 });
 
 
-router.get("/:id", async (req, res, next) => {
+router.get("/home/:id", async (req, res, next) => {
   try{
     const {id} = req.params;
     if(typeof id === 'string' && id.length > 8){
         
       const db = await Dog.findByPk(id);
       res.send( db );
+      
 
   } 
     const getApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
@@ -92,6 +103,8 @@ router.get("/:id", async (req, res, next) => {
         
       }
     })
+    
+    
     const find = infoApi.find(data => data.id === Number(id));
     res.send(find ? find : "id not Found")
   } catch(err){
