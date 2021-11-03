@@ -100,13 +100,15 @@ function handleSortName(e){
         />
         
         {currentDogs?.map((el) => {
+          console.log("soy una caca ", el.Temperaments)
           return (
             <div>
                 <Card
-                  temperament={el.temperament}
+                  temperament={el.temperament? el.temperament : el.Temperaments}
                   name={el.name}
                   image={el.image}
                   weight={el.weight}
+                  id={el.id}
                   key={el.id}
                 />
             </div>

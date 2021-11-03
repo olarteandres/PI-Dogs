@@ -81,22 +81,22 @@ const initialstate = {
                 }
 
             case FILTER_BY_WEIGHT:
-                const isNan = state.dogs.filter(e => !isNaN(e.weight[0]))
+                const isNan = state.dogs.filter(e => !isNaN(e.weight? e.weight[0] : e.weight_min))
                 const sortWeight = action.payload === "asc" ?
                 isNan.sort(function(a, b){
-                    if(parseInt(a.weight[0]) > parseInt(b.weight[0])){
-                        return 0;
+                    if(parseInt(a.weight? a.weight[0] : a.weight_min) > parseInt(b.weight? b.weight[0] : b.weight_min)){
+                        return 1;
                     }
-                    if(parseInt(b.weight[0]) > parseInt(a.weight[0])){
+                    if(parseInt(b.weight? b.weight[0] : b.weight_min) > parseInt(a.weight? a.weight[0] : a.weight_min)){
                         return -1
                     }
                     return 0
                 }) :
                 state.dogs.sort(function(a, b){
-                    if(parseInt(a.weight[1]) > parseInt(b.weight[1])){
-                        return -1;
+                    if(parseInt(a.weight? a.weight[0] : a.weight_min) > parseInt(b.weight? b.weight[0] : b.weight_min)){
+                        return -1
                     }
-                    if(parseInt(b.weight[1]) > parseInt(a.weight[1])){
+                    if(parseInt(b.weight? b.weight[0] : b.weight_min) > parseInt(a.weight? a.weight[0] : a.weight_min)){
                         return 1
                     }
                     return 0

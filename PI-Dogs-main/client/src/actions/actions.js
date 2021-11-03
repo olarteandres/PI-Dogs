@@ -70,6 +70,15 @@ export function filterDogsByCreated(payload){
     }
 }
 
+// export function addDog(payload){ 
+//    return async function(dispatch){
+//        const created = await axios.post('http://localhost:3001/api/dogs', payload);
+//        return created;
+//    }
+// }
+
+
+
 export function orderByName(payload){
     return {
         type: ORDER_BY_NAME,
