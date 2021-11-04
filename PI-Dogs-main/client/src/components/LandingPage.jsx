@@ -5,7 +5,7 @@ import styles from './LandingPage.module.css'
 export default function LandingPage(){
     return(
         <Fragment>
-            <div className={styles.hero}>
+            <div >
                 <h1 className={styles.title}>Welcome to Woof</h1>
                 <Link to='/home'>
                     <button className={styles.bubblyButton}>Let's Woof</button>

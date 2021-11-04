@@ -1,4 +1,4 @@
-import {GET_DOG, ADD_DOGS, DETAIL_DOGS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILTER_BY_TEMPERAMENT, SEARCHBAR, FILTER_BY_CREATED, ORDER_BY_NAME} from "../actions/types.js"
+import {GET_DOG, ADD_DOGS, GET_DETAILS, GET_TEMPERAMENTS, FILTER_BY_WEIGHT, FILTER_BY_TEMPERAMENT, SEARCHBAR, FILTER_BY_CREATED, ORDER_BY_NAME} from "../actions/types.js"
 
 
 
@@ -19,7 +19,8 @@ const initialstate = {
              return{
                  ...state,
                  dogs: action.payload,
-                 allDogsTemp: action.payload
+                 allDogsTemp: action.payload,
+                //  details: action.payload
              }
 
          case ADD_DOGS:
@@ -28,7 +29,7 @@ const initialstate = {
                 
             }
 
-         case DETAIL_DOGS:
+         case GET_DETAILS:
             return{
                 ...state,
                 details: action.payload
@@ -42,7 +43,7 @@ const initialstate = {
             case SEARCHBAR:
             return{
                 ...state,
-                dogs: action.payload
+                allDogs: action.payload
             }
 
             case ORDER_BY_NAME:
@@ -109,7 +110,7 @@ const initialstate = {
             case FILTER_BY_TEMPERAMENT:
             const dogsTemp = state.allDogsTemp
             const tempFilter = action.payload === 'Temperaments' ? dogsTemp :  dogsTemp.filter(e => {
-                if (e.temperament && e.temperament.includes(action.payload)) return e;})
+                if (e.temperament && e.temperament.includes(action.payload)) return e})
             return {...state, dogs: tempFilter
             }
 

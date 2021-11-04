@@ -63,7 +63,7 @@ function handleSortName(e){
     <div>
       <h1>Create Dogs</h1>
       <Link to="/dogs">Nueva Raza</Link>
-      <button onClick={(e) => {handleClick(e);}}>
+      <button onClick={(e) => {handleClick(e)}}>
         Reload Dogs
       </button>
       <div>
@@ -72,9 +72,6 @@ function handleSortName(e){
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
           </select>
-          <select>
-          <option value="Ord">Orden alfabético</option>
-        </select>
         <select onChange={e => handleFilterWeight(e)}>
           <option value="asc">Peso minimo</option>
           <option value="desc">Peso maximo</option>
@@ -100,7 +97,6 @@ function handleSortName(e){
         />
         
         {currentDogs?.map((el) => {
-          console.log("soy una caca ", el.Temperaments)
           return (
             <div>
                 <Card

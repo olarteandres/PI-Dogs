@@ -4,16 +4,16 @@ import { useDispatch } from "react-redux";
 import { getName } from "../actions/actions.js";
 
 export default function SearchBar(){
-    const [search, setSearch] = useState('');
-    const dispatch = useDispatch();
+    const [search, setSearch] = useState('')
+    const dispatch = useDispatch()
 
     function onSubmit(e){
-        e.preventDefault();
+        e.preventDefault()
         dispatch(getName(search))
     }
 
     function onInputChange(e){
-        e.preventDefault();
+        e.preventDefault()
         setSearch(e.target.value)
     }
 

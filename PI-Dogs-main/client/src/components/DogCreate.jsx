@@ -44,14 +44,7 @@ export default function CreateDogs () {
     }
 
 
-    function handleCheck (e) {
-        if(e.target.checked){
-            setInput({
-                ...input,
-                status: e.target.value
-            })
-        }
-    }
+  
 
     function handleSelect(e){
         setInput({
