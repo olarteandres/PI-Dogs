@@ -3,7 +3,6 @@ const axios = require("axios");
 const { API_KEY } = process.env;
 const { Dog, Temperament } = require("../db");
 const {Op} = require("sequelize");
-
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -21,15 +20,15 @@ const dogsApi = async  () =>{
             image: response.image.url,
             origin: response.origin,
             temperament:response.temperament
-            
-            
+
+
 
           }
         }); 
         return dogMap
 
 }
- 
+
 
 
 const getDB = async () => {
@@ -54,77 +53,77 @@ const getAllDogs = async ()=>{
 router.get('/', async (req, res, next) => {
   //acá va a estar el query tambien en caso de que tenga if(req.query) ...
   const {name} = req.query;
-  // const getApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
+  const getApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`)
   
-  // if(!name){
-  //   const infoApi = getApi.data.map(response => {
-  //     return {
-  //             name: response.name,
-  //             id: response.id,
-  //             weight: response.weight.metric.split("-"),
-  //             height: response.height.metric.split("-"),
-  //             life_span: response.life_span,
-  //             image: response.image.url,
-  //             origin: response.origin,
-  //             temperament:response.temperament
+  if(!name){
+    const infoApi = getApi.data.map(response => {
+      return {
+              name: response.name,
+              id: response.id,
+              weight: response.weight.metric.split("-"),
+              height: response.height.metric.split("-"),
+              life_span: response.life_span,
+              image: response.image.url,
+              origin: response.origin,
+              temperament:response.temperament
               
               
-
-  //           }
-  //         }); 
-  //         const data = await getDB()
-  //         const dataAll = infoApi.concat(data)
-  //         return res.json(dataAll)
-  //       }
-          
-
-        const api = await dogsApi();
-        if(name){
-          const newQuery = await api.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
-          newQuery.length ?
-          //   const db = await Dog.findAll({
-            //     includes: Temperament,  //para mas adelnate cuando conecte todo
-            //     where: {
-              //         name: {
-                //             [Op.iLike]: '%' + name + '%'
-                //         }
-                //     }
-          // })
-          // const infoTotal = newQuery.concat(db);
-            
-          
-           res.json(newQuery):
-           res.status(404).send("sasdasd")
-
-        }else {
-           res.json(api)
-
+            }
+          }); 
+          const data = await getDB()
+          const dataAll = infoApi.concat(data)
+          return res.json(dataAll)
         }
 
-  
+
+          if(name){
+            const api = await dogsApi();
+            const newQuery = await api.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
+            const db = await Dog.findAll({
+              includes: Temperament,  //para mas adelnate cuando conecte todo
+              where: {
+                  name: {
+                      [Op.iLike]: '%' + name + '%'
+                  }
+              }
+          })
+          if(name){
+            const api = await dogsApi();
+            const newQuery = await api.filter(d => d.name.toLowerCase().includes(name.toLowerCase()))
+            const infoTotal = newQuery.concat(db);
+          
+
+
+          return res.json(infoTotal);
+        }else {
+          return res.json(api)
+
+    
+        }
+      }
+
+
 // const infoApi2 = info.filter(info => info.name.toLowerCase().includes(name.toLowerCase()))
 // return res.json(infoApi2 ? infoApi2 : "Not Found") 
 });
-
 router.get('/:id', async (req, res, next) => {
   try{
   const {id} = req.params;
   const dogTotales = await getAllDogs()
-  
+
   if(typeof id === 'string' && id.length > 8){
-      
-      let filter = dogTotales.filter(e => e.id == id)
+
+      let filter = await dogTotales.filter(e => e.id == id)
       res.send(filter)
       // const db = await Dog.findByPk(id);
       // res.send( db );
-      
 
   } else {
-
   const api = await axios(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
   const infoApi = api.data.map(response => {
           return {
               id: response.id,
+              image: response.image.url,
               name: response.name,
               life_span: response.life_span,
               weight: response.weight.metric,
@@ -135,8 +134,8 @@ router.get('/:id', async (req, res, next) => {
   }); 
 
   //hay que traerlos de la base de datos los temperamentos guardados?
-  const find = infoApi.find(data => data.id === Number(id));
-  
+  const find = infoApi.filter(data => data.id === Number(id));
+
   res.send(find? find : 'Id API not found')
 
   }
@@ -145,7 +144,6 @@ router.get('/:id', async (req, res, next) => {
   next(err)
 }
 });
-
 router.post('/', async function(req, res, next) {
   const {name, height, weight, life_span, image, origin,temperament, createdInDb} = req.body
   const newDog = await Dog.create({
@@ -156,7 +154,9 @@ router.post('/', async function(req, res, next) {
     weight,
     origin,
     createdInDb
-    
+
+
+
   });
   temperament.map(async e => {
     const temperamentDB = await Temperament.findAll({
@@ -169,5 +169,4 @@ router.post('/', async function(req, res, next) {
 })
   res.json(newDog)
 });
-
 module.exports = router;
