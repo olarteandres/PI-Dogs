@@ -46,7 +46,7 @@ const initialstate = {
             case SEARCHBAR:
             return{
                 ...state,
-                dogSearch: action.payload
+                dogs: action.payload
             }
 
             case ORDER_BY_NAME:

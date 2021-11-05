@@ -9,7 +9,7 @@ import Paginado from "./Paginado";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const allDogs = useSelector((state) => state.dogSearch);
+  const allDogs = useSelector((state) => state.dogs);
   const allTemperaments = useSelector((state) => state.temperaments);
   const [orden, setOrden] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
