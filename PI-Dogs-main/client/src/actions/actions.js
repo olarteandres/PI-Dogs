@@ -86,7 +86,7 @@ export function getName(name) {
         const query = await axios.get('http://localhost:3001/api/dogs?name='+name)
         dispatch ({
             type: SEARCHBAR,
-            payload: query.data,
+            payload: query.data
         })
     }   
 }

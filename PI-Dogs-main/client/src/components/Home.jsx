@@ -9,7 +9,7 @@ import Paginado from "./Paginado";
 
 export default function Home() {
   const dispatch = useDispatch();
-  const allDogs = useSelector((state) => state.dogs);
+  const allDogs = useSelector((state) => state.dogSearch);
   const allTemperaments = useSelector((state) => state.temperaments);
   const [orden, setOrden] = useState("")
   const [currentPage, setCurrentPage] = useState(1)
@@ -61,13 +61,13 @@ function handleSortName(e){
 
   return (
     <div>
+      <SearchBar/>
       <h1>Create Dogs</h1>
       <Link to="/dogs">Nueva Raza</Link>
       <button onClick={(e) => {handleClick(e)}}>
         Reload Dogs
       </button>
       <div>
-      <SearchBar/>
         <select onChange={e => handleSortName(e)}>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>

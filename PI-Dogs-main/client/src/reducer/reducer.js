@@ -9,7 +9,8 @@ const initialstate = {
     details : [],
     newDogs : [],
     temperaments: [],
-    weight: []
+    weight: [],
+    dogSearch: []
 
 };
 
@@ -20,6 +21,8 @@ const initialstate = {
                  ...state,
                  dogs: action.payload,
                  allDogsTemp: action.payload,
+                 dogSearch: action.payload
+
                 //  details: action.payload
              }
 
@@ -43,7 +46,7 @@ const initialstate = {
             case SEARCHBAR:
             return{
                 ...state,
-                allDogs: action.payload
+                dogSearch: action.payload
             }
 
             case ORDER_BY_NAME:
