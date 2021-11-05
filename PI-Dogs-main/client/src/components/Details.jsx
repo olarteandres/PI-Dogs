@@ -30,9 +30,9 @@ export default function Detail (props){
                     <img src={myDog.image ? myDog.image : myDog[0].image} alt="asdasdasd" width ="200px" height="200px"/>
                      <h2>Origen: {myDog.origin ? myDog.origin : myDog[0].origin }</h2>
                      <h2>Temperamento: {!myDog[0].createdInDb ? myDog[0].temperament + " " : myDog[0].Temperaments.map(el => el.name + (" "))}</h2>
-                     <h2>Peso: {myDog.weight}</h2>
-                     <h2>Altura: {myDog.height}</h2>
-                     <h2>Años de Vida: {myDog.life_span}</h2>
+                     <h2>Peso: {myDog.weight ? myDog.weight : myDog[0].weight}</h2>
+                     <h2>Altura: {myDog.height ? myDog.height : myDog[0].height}</h2>
+                     <h2>Años de Vida: {myDog.life_span ? myDog.life_span : myDog[0].life_span}</h2>
 
                 </div>: <p>Cargando...</p>
 

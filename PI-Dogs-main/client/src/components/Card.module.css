@@ -1,0 +1,48 @@
+.dog_card {
+	user-select: none;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+    height: 550px;
+    width: 300px;
+    background: linear-gradient(0deg, #ff9930 0%, #ffe488 100%);
+    border-radius: 25px;
+    padding: 15px;
+    margin: 20px;
+    text-decoration: none;
+	box-shadow: 6px 6px 14px 2px rgba(0,0,0,0.88);
+}
+
+.button_details {
+	width: 250px;
+	background-color:#ff973000;
+	border-radius:6px;
+	border:1px solid #ffe488;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+}
+
+.button_details:active {
+	position:relative;
+	top:1px;
+}
+
+.button_details:hover {
+background-color: #ffe488;
+}
+
+
+.dog_image {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+}

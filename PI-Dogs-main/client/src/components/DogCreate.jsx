@@ -108,8 +108,13 @@ export default function CreateDogs () {
                      {errors.height && (<p>{errors.height}</p>)}
                  </div>
                  <div>
+                     <label>origin:</label>
+                     <input type="number"value= {input.origin}name= "origin"onChange={(e) => handleChange(e)}/>
+                     {errors.origin && (<p>{errors.origin}</p>)}
+                 </div>
+                 <div>
                      <label>life_span:</label>
-                     <input type="number"value= {input.life_span}name= "life_span"onChange={(e) => handleChange(e)}/>
+                     <input type="text"value= {input.life_span}name= "life_span"onChange={(e) => handleChange(e)}/>
                      {errors.life_span && (<p>{errors.life_span}</p>)}
                  </div>
                  <div>
