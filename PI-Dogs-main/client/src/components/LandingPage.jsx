@@ -6,9 +6,9 @@ export default function LandingPage(){
     return(
         <Fragment>
             <div >
-                <h1 className={styles.title}>Welcome to Woof</h1>
+                <h1 className={styles.title}>Bienvenido</h1>
                 <Link to='/home'>
-                    <button className={styles.bubblyButton}>Let's Woof</button>
+                    <button className={styles.bubblyButton}>Ingresar</button>
                 </Link>
                 <video autoPlay muted loop className={styles.video_bg}>
                     <source src="../movie.mp4" type="video/mp4"/>

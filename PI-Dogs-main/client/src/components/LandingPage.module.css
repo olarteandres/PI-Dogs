@@ -36,7 +36,7 @@
       margin-bottom: 60px;
       -webkit-appearance: none;
       appearance: none;
-      background-color: #1a3813c5;
+      background-color: #fabd4b46;
       color: #fff;
       border-radius: 4px;
       border: none;
@@ -61,8 +61,8 @@
     }
       .bubblyButton:active {
       transform: scale(0.9);
-      background-color: #023809;
-      box-shadow: 0 2px 25px rgba(2, 122, 32, 0.2);
+      background-color: #70511765;
+      box-shadow: 0 2px 25px #00abdf(2, 122, 32, 0.2);
     }
     .bubblyButton.animate:before {
       display: block;

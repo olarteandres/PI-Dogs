@@ -1,0 +1,20 @@
+.boton{
+    background-color: #00101d;
+  border-radius: 10px;
+  color: white;
+  padding: 10px 15px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+} 
+
+.boton2{
+    background-color: #011d35;
+  border-radius: 10px;
+  color: white;
+  padding: 5px 25px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+  

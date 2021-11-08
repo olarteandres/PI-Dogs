@@ -1,0 +1,38 @@
+.search{
+    position: relative; left: 20%; bottom: 0%;
+    background-color: #fda502(5, 135, 196, 0.315);
+    border-color: #fabd4b; 
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 20px;
+    width: 250px;
+    height: 40px;
+    display: top;
+    align-items: flex-start;
+    margin-left: -25px;
+}
+    
+    
+.btn{
+    background: linear-gradient(0deg, #fda502 0%, #fda50200 100%);
+    border: transparent;
+    color: black;
+    margin-top: -10%;
+}
+    
+.input{
+    margin-top: 10px;
+    margin-left: 20px;
+    border-color: rgba(240, 248, 255, 0);
+    background: rgba(255, 255, 255, 0.233); 
+    border: none;
+    font-family: Montserrat;
+}
+
+.icon{
+    height: 20px;
+    width: 20px;
+    color: black;
+    margin-top: -60px;
+    margin-left: 180px;
+}

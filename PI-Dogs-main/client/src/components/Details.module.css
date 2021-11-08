@@ -1,28 +1,11 @@
 .dog_card {
-	/* user-select: none;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: stretch;
-	align-content: stretch;
-	text-align: center;
-    height: 450px;
-    width: 400px;
-    background: linear-gradient(0deg, #ff9930 0%, #ffe488 100%);
-    border-radius: 25px;
-    padding: 15px;
-    margin: 20px;
-    text-decoration: none;
-	box-shadow: 6px 6px 14px 2px rgba(0,0,0,0.88); */
-	width: 68%;
-	margin: 20px;
+	width: 50%;
+	margin: 15px;
 	border-radius: 6px;
 	overflow: hidden;
 	box-shadow: 0px 1px 10px rgba(0,0,0,0.2);
 	transition: all 400ms ease-out;
 	cursor: default;
-	/* background: linear-gradient(0deg, #00101d 0%, #00f4ff 100%); */
 	background-color: #fabd4b46;
 }
 

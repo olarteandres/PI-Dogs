@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar.jsx";
 import Card from "./Card";
 import Paginado from "./Paginado";
+import style from  './Card.module.css'
+import styles from './Home.module.css'
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -62,28 +64,32 @@ function handleSortName(e){
   return (
     <div>
       <SearchBar/>
-      <h1>Create Dogs</h1>
-      <Link to="/dogs">Nueva Raza</Link>
-      <button onClick={(e) => {handleClick(e)}}>
+      <div>
+      <Link to="/dogs"><button className={styles.boton}> Nueva Raza</button></Link>
+      </div>
+      <button className={styles.boton}  onClick={(e) => {handleClick(e)}}>
         Reload Dogs
       </button>
       <div>
-        <select onChange={e => handleSortName(e)}>
+        <div>
+        <select className={styles.boton2} onChange={e => handleSortName(e)}>
+        <option value="asc">Ordenar</option>
           <option value="asc">A-Z</option>
           <option value="desc">Z-A</option>
           </select>
-        <select onChange={e => handleFilterWeight(e)}>
+          </div>
+        <select className={styles.boton2} onChange={e => handleFilterWeight(e)}>
+        <option value="asc">Ordenar por peso</option>
           <option value="asc">Peso minimo</option>
           <option value="desc">Peso maximo</option>
         </select>
 
-        <select onChange={e => handleFilterByCreated(e)}>
-          <option value="Exist">Existentes</option>
+        <select className={styles.boton2} onChange={e => handleFilterByCreated(e)}>
           <option value="All">Todas las razas</option>
           <option value="Created">Creadas</option>
         </select>
        
-        <select onChange={(e)=>handleFilterTemp(e)}>
+        <select className={styles.boton2} onChange={(e)=>handleFilterTemp(e)}>
                     <option name='temperament' key={'a'}>Temperaments</option>
                     {allTemperaments.map((tem,i)=>(
                         <option name='temperaments'key={i} value={tem.name}>{tem.name}</option>
@@ -95,10 +101,10 @@ function handleSortName(e){
         allDogs= {allDogs?.length}
         paginado= {paginado}
         />
-        
+        <div className= {style.cards}>
         {currentDogs?.map((el) => {
           return (
-            <div>
+            <div >
                 <Card
                   temperament={el.temperament? el.temperament : el.Temperaments}
                   name={el.name}
@@ -111,6 +117,7 @@ function handleSortName(e){
           );
         })}
       </div>
+    </div>
     </div>
   );
 }
