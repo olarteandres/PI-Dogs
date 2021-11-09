@@ -14,8 +14,12 @@ const dogsApi = async  () =>{
     return {
             name: response.name,
             id: response.id,
-            weight: response.weight.metric.split("-"),
-            height: response.height.metric.split("-"),
+            height :hgt=response.height.metric?.split(" - "),
+            heightMin:hgt[0],
+            heightMax:hgt[1],
+            weight : wgt= response.weight.metric?.split(" - "),
+            weightMin:wgt[0],
+            weightMax: wgt[1],
             life_span: response.life_span,
             image: response.image.url,
             origin: response.origin,
@@ -60,8 +64,12 @@ router.get('/', async (req, res, next) => {
       return {
               name: response.name,
               id: response.id,
-              weight: response.weight.metric.split("-"),
-              height: response.height.metric.split("-"),
+              height :hgt=response.height.metric?.split(" - "),
+              heightMin:hgt[0],
+              heightMax:hgt[1],
+              weight : wgt= response.weight.metric?.split(" - "),
+              weightMin:wgt[0],
+              weightMax: wgt[1],
               life_span: response.life_span,
               image: response.image.url,
               origin: response.origin,
@@ -126,8 +134,12 @@ router.get('/:id', async (req, res, next) => {
               image: response.image.url,
               name: response.name,
               life_span: response.life_span,
-              weight: response.weight.metric,
-              height: response.height.metric,
+              height :hgt=response.height.metric?.split(" - "),
+              heightMin:hgt[0],
+              heightMax:hgt[1],
+              weight : wgt= response.weight.metric?.split(" - "),
+              weightMin:wgt[0],
+              weightMax: wgt[1],
               temperament: response.temperament,
               origin: response.origin,
           }
@@ -145,13 +157,15 @@ router.get('/:id', async (req, res, next) => {
 }
 });
 router.post('/', async function(req, res, next) {
-  const {name, height, weight, life_span, image, origin,temperament, createdInDb} = req.body
+  const {name,  weightMin,weightMax,heightMax,heightMin, life_span, image, origin,temperament, createdInDb} = req.body
   const newDog = await Dog.create({
     name,
     life_span,
     image,
-    height,
-    weight,
+    heightMin,
+    heightMax,
+    weightMin,
+    weightMax,
     origin,
     createdInDb
 

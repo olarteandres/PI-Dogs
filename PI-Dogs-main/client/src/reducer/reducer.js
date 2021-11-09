@@ -85,22 +85,22 @@ const initialstate = {
                 }
 
             case FILTER_BY_WEIGHT:
-                const isNan = state.dogs.filter(e => !isNaN(e.weight? e.weight[0] : e.weight_min))
+                const isNan = state.dogs.filter(e => !isNaN(e.weight? e.weight[0] : e.weight))
                 const sortWeight = action.payload === "asc" ?
                 isNan.sort(function(a, b){
-                    if(parseInt(a.weight? a.weight[0] : a.weight_min) > parseInt(b.weight? b.weight[0] : b.weight_min)){
+                    if(parseInt(a.weightMax? a.weightMax[0] : a.weightMax) > parseInt(b.weightMax? b.weightMax[0] : b.weightMax)){
                         return 1;
                     }
-                    if(parseInt(b.weight? b.weight[0] : b.weight_min) > parseInt(a.weight? a.weight[0] : a.weight_min)){
+                    if(parseInt(b.weightMax? b.weightMax[0] : b.weightMax) > parseInt(a.weightMax? a.weightMax[0] : a.weightMax)){
                         return -1
                     }
                     return 0
                 }) :
                 state.dogs.sort(function(a, b){
-                    if(parseInt(a.weight? a.weight[0] : a.weight_min) > parseInt(b.weight? b.weight[0] : b.weight_min)){
+                    if(parseInt(a.weightMin? a.weightMin[0] : a.weightMin) > parseInt(b.weightMin? b.weightMin[0] : b.weightMin)){
                         return -1
                     }
-                    if(parseInt(b.weight? b.weight[0] : b.weight_min) > parseInt(a.weight? a.weight[0] : a.weight_min)){
+                    if(parseInt(b.weightMin? b.weightMin[0] : b.weightMin) > parseInt(a.weightMin? a.weightMin[0] : a.weightMin)){
                         return 1
                     }
                     return 0

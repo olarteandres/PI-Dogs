@@ -27,12 +27,15 @@ export default function Detail (props){
                 myDog.length>0 ?  
 
                 <div className= {styles.dog_card}>
-                    <h4>{myDog.name ? myDog.name : myDog[0].name}</h4>
+                    <h1>{myDog.name ? myDog.name : myDog[0].name}</h1>
                     <img src={myDog.image ? myDog.image : myDog[0].image} alt="asdasdasd" width ="200px" height="200px"/>
                      <p>Origen: {myDog.origin ? myDog.origin : myDog[0].origin }</p>
                      <p>Temperamento: {!myDog[0].createdInDb ? myDog[0].temperament + " " : myDog[0].Temperaments.map(el => el.name + (" "))}</p>
-                     <p>Peso: {myDog[0].weight ? myDog[0].weight : myDog[0].weight}</p>
-                     <p>Altura: {myDog[0].height ? myDog[0].height : myDog[0].height}</p>
+                     <p>Peso Maximo: {myDog[0].weightMax}</p>
+                     <p>Peso Minimo: {myDog[0].weightMin}</p>
+                     <p>Altura Maxima: {myDog[0].heightMax}</p>
+                     <p>Altura Minima: {myDog[0].heightMin}</p>
+                     {/* <p>Altura: {myDog[0].height ? myDog[0].height : myDog[0].height}</p> */}
                      <p>Años de Vida: {myDog.life_span ? myDog.life_span : myDog[0].life_span}</p>
 
                 </div>: <p>Cargando...</p>

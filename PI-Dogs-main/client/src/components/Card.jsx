@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styles from './Card.module.css'
 
 
-export default function Card ({image, name, weight, temperament, id}) {
+export default function Card ({image, name, weightMax,weightMin, temperament, id}) {
     
 return (
     <div className= {styles.dog_card}>
@@ -11,7 +11,7 @@ return (
         <img src={image} className={styles.dog_image} alt="img not found"  />
         <p>temperamentos:{!Array.isArray(temperament)? temperament :  temperament.map(e => e.name).join(', ')}</p>
         <p>Peso</p>
-        <strong><p>{weight[0]} - {weight[1]} Kg</p></strong>
+        <strong><p>{weightMax} a {weightMin} Kg</p></strong>
         <Link to={"/" + id}><button className= {styles.button_details}>More Details</button></Link>
     </div>
 )

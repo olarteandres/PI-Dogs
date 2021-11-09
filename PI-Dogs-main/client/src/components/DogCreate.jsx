@@ -98,16 +98,16 @@ export default function CreateDogs () {
                  <div >
 
                      <label>weight:</label>
-                     <input className={style.input} type="number" placeholder= "Max" value= {input.weight.max}name= "weightMax"onChange={(e) => handleChange(e)}/>
+                     <input className={style.input} type="number" placeholder= "Max" value= {input.weightMax}name= "weightMax"onChange={(e) => handleChange(e)}/>
                      {errors.weight && (<p>{errors.weight}</p>)}
-                     <input className={style.input} type="number" placeholder= "Min" value= {input.weight.min}name= "weightMin"onChange={(e) => handleChange(e)}/>
+                     <input className={style.input} type="number" placeholder= "Min" value= {input.weightMin}name= "weightMin"onChange={(e) => handleChange(e)}/>
                      {errors.weight && (<p>{errors.weight}</p>)}
                  </div>
                  <div>
                      <label>height:</label>
-                     <input className={style.input} type="number" placeholder= "Max" value= {input.height.max}name= "heightMax"onChange={(e) => handleChange(e)}/>
+                     <input className={style.input} type="number" placeholder= "Max" value= {input.heightMax}name= "heightMax"onChange={(e) => handleChange(e)}/>
                      {errors.height && (<p>{errors.height}</p>)}
-                     <input className={style.input} type="number" placeholder= "Min" value= {input.height.min}name= "heightMin"onChange={(e) => handleChange(e)}/>
+                     <input className={style.input} type="number" placeholder= "Min" value= {input.heightMin}name= "heightMin"onChange={(e) => handleChange(e)}/>
                      {errors.height && (<p>{errors.height}</p>)}
                  </div>
                  <div>

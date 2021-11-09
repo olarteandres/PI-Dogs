@@ -109,7 +109,8 @@ function handleSortName(e){
                   temperament={el.temperament? el.temperament : el.Temperaments}
                   name={el.name}
                   image={el.image}
-                  weight={el.weight}
+                  weightMin={el.weightMin}
+                  weightMax={el.weightMax}
                   id={el.id}
                   key={el.id}
                 />
