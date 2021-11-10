@@ -8,9 +8,9 @@ function validate(input){
     let errors = {}
     if(!input.name){
         errors.name = "Se requiere un nombre";
-    } if (!input.weight){
+    }else if (!input.weight){
         errors.weight = "Se requiere Peso";
-    }if (!input.height){
+    }else if (!input.height){
         errors.height = "Se requiere Altura";
     }else if (!input.life_span){
         errors.life_span = "Se requiere Edad";
